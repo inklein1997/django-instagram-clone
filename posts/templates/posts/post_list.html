@@ -1,0 +1,9 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+<a href="{% url 'new' %}"><h1>Create a new post</h1></a>
+        {% for post in object_list %}
+        <strong>{{ post.user_id.username }}</strong><br/>
+        <img src="{{ post.image.url }}" width=400 height=400>
+        <p><em>{{ post.created_at }}</em><br/>{{ post.caption }}</p>
+        {% endfor %}
+{% endblock %}

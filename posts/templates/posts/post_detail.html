@@ -1,0 +1,19 @@
+{% extends 'posts/base.html' %} {% block content %}
+
+<strong>{{object.user_id.username}}</strong><br />
+<img src="{{ object.image.url }}" width="400" height="400" />
+<p><em>{{object.created}}</em><br />{{ object.description }}</p>
+<ul>
+  {% for comment in object.comment_set.all %}
+  <li>
+    <strong>{{comment.user_id}}</strong><br />
+    {{comment.text}}
+  </li>
+  {% endfor %}
+</ul>
+<form action="{% url 'detail' pk=object.id %}" method="POST">
+  {% csrf_token %} {{ comment_form.as_p}}
+  <input type="submit" value="Comment" />
+</form>
+
+{% endblock %}
